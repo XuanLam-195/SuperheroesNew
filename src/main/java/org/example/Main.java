@@ -5,6 +5,6 @@ public class Main {
         UserInterface ui = new UserInterface();
         ui.startProgram();
         System.out.println("hej med dig");
-
+        System.out.println("hva så");
     }
 }
