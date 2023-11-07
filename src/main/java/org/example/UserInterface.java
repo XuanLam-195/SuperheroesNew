@@ -1,7 +1,5 @@
 package org.example;
-
-
-
+import org.example.Control;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +15,6 @@ public class UserInterface {
         int userChoice;
         Scanner sc = new Scanner(System.in);
         Control control = new Control();
-
         do {
             System.out.println("Welcome to Superhero Universe: ");
             System.out.println();
@@ -98,8 +95,18 @@ public class UserInterface {
             }
 
             if (userChoice == VIEW) {
-                System.out.println(control);
+                control.loadListOfHeroes();
+                ArrayList<Superhero> loadedListOfHeroes = control.getSuperheroes();
+                System.out.println("Loaded Superhero");
+                if (!loadedListOfHeroes.isEmpty()) {
+                    for (Superhero superhero : loadedListOfHeroes) {
+                        System.out.println(superhero + "\n");
+                    }
+                } else {
+                    System.out.println("No superhero found");
+                }
             }
+
             if (userChoice == SEARCH) {
                 System.out.println("Insearch Name");
                 String searchName = sc.nextLine();
@@ -110,6 +117,7 @@ public class UserInterface {
                 }
                 System.out.println(heroes);
             }
+
 
             if (userChoice == EDIT) {
                 System.out.println(control);
@@ -150,7 +158,6 @@ public class UserInterface {
                     System.out.println("Field left unchanged.");
                 } finally {
                     newStrength = 0;
-
                 }
 
                 Superhero newHero = new Superhero(newName, newRealName, newSuperPower,
