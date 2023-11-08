@@ -19,6 +19,7 @@ public class UserInterface {
         Control control = new Control();
 
         do {
+            System.out.println();
             System.out.println("Welcome to Superhero Universe: ");
             System.out.println();
             System.out.println("Press 1 to 'Create your Superhero'");
@@ -31,6 +32,8 @@ public class UserInterface {
             System.out.println("-----------------------");
             System.out.println("Press 5 to delete Heroes");
             System.out.println("------------------------");
+            System.out.println("press 6 to sorted by superhero name");
+            System.out.println("____________________________________");
             System.out.println("Press 9 to 'Exit Program'");
             System.out.println("------------------------");
 
@@ -40,27 +43,35 @@ public class UserInterface {
                 System.out.println("CREATE SUPERHERO");
                 System.out.println("Enter Hero name: ");
                 String name = sc.next();
+                System.out.println("___________________");
                 if (name.isEmpty()) {
                     name = "Unknown";
+
                 }
 
                 System.out.println("Enter Hero real name: ");
                 String realName = sc.next();
+                System.out.println("_____________________");
                 if (realName.isEmpty()) {
                     realName = "Unknown";
+
                 }
 
                 System.out.println("Hero's superpower: ");
                 String superPower = sc.next();
+                System.out.println("_____________________");
                 if (superPower.isEmpty()) {
                     superPower = "Unknown";
+
                 }
 
                 System.out.println("Year of created: ");
-                String year = sc.next();
+                String year = sc.nextLine();
                 sc.nextLine();
+                System.out.println("_______________________");
                 if (year.isEmpty()) {
                     year = "0";
+
                 }
                 int yearCreated;
                 try {
@@ -73,14 +84,18 @@ public class UserInterface {
 
                 System.out.println("Is hero a human: ");
                 String isHuman = sc.next();
+                System.out.println("_____________________");
                 if (isHuman.isEmpty()) {
                     isHuman = "Yes";
+
                 }
 
                 System.out.println("What are the hero's strengths: ");
                 String strengthValue = sc.next();
+                System.out.println("______________________________");
                 if (strengthValue.isEmpty()) {
                     strengthValue = "1";
+
                 }
                 double strength;
                 try {

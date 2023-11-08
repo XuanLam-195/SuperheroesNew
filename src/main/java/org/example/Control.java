@@ -3,6 +3,7 @@ package org.example;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Control {
@@ -37,6 +38,7 @@ public class Control {
         superheroes.add(iroman);
         superheroes.add(hulk);
         superheroes.add(batman);
+        Collections.sort(superheroes, new SuperheroesNameComparator());
     }
 
     public void addSuperhero(Superhero hero) {
