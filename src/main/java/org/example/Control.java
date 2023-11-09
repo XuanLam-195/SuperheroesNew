@@ -24,13 +24,13 @@ public class Control {
                 "Wall-climbing, web-shooting, danger sense",
                 1962, "Yes", 6299);
         System.out.println("-----------------------------");
-        Superhero iroman = new Superhero("Tony", "ironman", "Flight, Strength, energy weapon, protection",
+        Superhero iroman = new Superhero("ironman", "Tony", "Flight, Strength, energy weapon, protection",
                 2015, "Yes", 9587);
         System.out.println("______________________________");
-        Superhero hulk = new Superhero("Robert", "hulk", "Invulnerability, regeneration, extraordinary leaping ability, Adaptability",
+        Superhero hulk = new Superhero("hulk", "Robert", "Invulnerability, regeneration, extraordinary leaping ability, Adaptability",
                 2018, "no", 8928);
         System.out.println("______________________________");
-        Superhero batman = new Superhero("Bruce Wayne", "Batman", "Exceptional Intelligence, Master Martial Artist, Physical Prowess",
+        Superhero batman = new Superhero("Batman", "Bruce Wayne", "Exceptional Intelligence, Master Martial Artist, Physical Prowess",
                 1939, "Yes", 6475);
 
         superheroes.add(superman);
@@ -85,9 +85,12 @@ public class Control {
         String heroes = "";
         int counter = 0;
         for (Superhero superhero : superheroes) {
-            heroes += (++counter) + "---" + superhero + "\n";
+            heroes += (++counter) + " " + superhero + "\n";
         }
         return heroes;
+    }
+
+    public void sortSuperHeroName() {
     }
 }
 

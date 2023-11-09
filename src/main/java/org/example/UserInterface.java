@@ -3,6 +3,7 @@ package org.example;
 
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -12,6 +13,8 @@ public class UserInterface {
         final int SEARCH = 3;
         final int EDIT = 4;
         final int DELETE = 5;
+        final int SORTSUPERHERO = 6;
+        final int SortRealName = 7;
         final int EXIT = 9;
 
         int userChoice;
@@ -34,6 +37,8 @@ public class UserInterface {
             System.out.println("------------------------");
             System.out.println("press 6 to sorted by superhero name");
             System.out.println("____________________________________");
+            System.out.println("press 7 to sorted by real name");
+            System.out.println("________________________________");
             System.out.println("Press 9 to 'Exit Program'");
             System.out.println("------------------------");
 
@@ -66,23 +71,24 @@ public class UserInterface {
                 }
 
                 System.out.println("Year of created: ");
-                String year = sc.nextLine();
-                sc.nextLine();
-                System.out.println("_______________________");
-                if (year.isEmpty()) {
-                    year = "0";
-
-                }
                 int yearCreated;
-                try {
-                    yearCreated = Integer.parseInt(year);
-                } catch (NumberFormatException e) {
-                    System.out.println("Must input a number!");
-                    System.out.println("Defaulted to year 0.");
-                    yearCreated = 0;
+                sc.nextLine();
+
+                while (true){
+                    try {
+                        yearCreated = sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("_______________________");
+                        break;
+                    }catch (InputMismatchException e){
+                        System.out.println("Must input a number!");
+                        System.out.println("________________");
+                        sc.nextLine();
+                    }
                 }
 
-                System.out.println("Is hero a human: ");
+
+                System.out.println("Is hero a human: (YES/NO)");
                 String isHuman = sc.next();
                 System.out.println("_____________________");
                 if (isHuman.isEmpty()) {
@@ -90,7 +96,7 @@ public class UserInterface {
 
                 }
 
-                System.out.println("What are the hero's strengths: ");
+                System.out.println("What are the hero's strengths: (0 - 1000) ");
                 String strengthValue = sc.next();
                 System.out.println("______________________________");
                 if (strengthValue.isEmpty()) {
@@ -109,7 +115,9 @@ public class UserInterface {
                 Superhero newHero = new Superhero(name, realName, superPower,
                         yearCreated, isHuman, strength);
                 control.addSuperhero(newHero);
-                System.out.println(newHero);
+                System.out.println(newHero + "\n" +
+                        name + " " + "has been registered!");
+
             }
 
             if (userChoice == VIEW) {
@@ -121,10 +129,40 @@ public class UserInterface {
                 ArrayList<Superhero> heroList = control.searchSuperheroName(searchName);
                 String heroes = "";
                 for (Superhero superhero : heroList) {
-                    heroes += superhero + "\n";
+                    heroes += superhero;
+
                 }
-                System.out.println(heroes);
+                // virker ikke helt
+                    System.out.println(heroes);
+                    System.out.println("_________________________");
+                    System.out.println("The superhero was not found!");
+
+
             }
+
+
+                if (userChoice == SORTSUPERHERO) {
+                    System.out.println("Sort by superhero name:");
+                    control.sortSuperHeroName();
+                    ArrayList<Superhero> superHeroesListe = control.getSuperheroes();
+                    for (Superhero superhero : superHeroesListe) {
+                        System.out.println(superhero.getName());
+                    }
+                }
+
+                if (userChoice == SortRealName){
+                    System.out.println("sort by real name: ");
+                    control.sortSuperHeroName();
+                    ArrayList<Superhero> superheroesRealName = control.getSuperheroes();
+                    for (Superhero superheroRealName: superheroesRealName){
+                        System.out.println(superheroRealName.getRealName());
+                    }
+                }
+
+
+
+
+
 
             if (userChoice == EDIT) {
                 System.out.println(control);
@@ -191,6 +229,8 @@ public class UserInterface {
         while (userChoice != EXIT);
         control.saveListOfHeroes();
         System.out.println("'Searching er done.'");
+
+
 
     }
 }

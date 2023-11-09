@@ -45,14 +45,16 @@ public class Superhero {
 
     @Override
     public String toString() {
-        System.out.println("List of superheroes");
         return
-                "Superhero Name: " + name +
+                "List of superheroes: "+
+                "\n" + "Superhero Name: " + name +
                         "\nReal Name: " + realName +
                         "\nSuper Power: " + superPower +
                         "\nYear Created: " + yearCreated +
                         "\nIs Human: " + isHuman +
-                        "\nStrengths: " + strength;
+                        "\nStrengths: " + strength + "\n";
+
+
     }
 }
 
