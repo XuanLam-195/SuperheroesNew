@@ -8,9 +8,9 @@ public class Superhero {
     private String superPower;
     private int yearCreated;
     private String isHuman;
-    private double strength;
+    private int strength;
 
-    public Superhero(String name, String realName, String superPower, int yearCreated, String isHuman, double strength) {
+    public Superhero(String name, String realName, String superPower, int yearCreated, String isHuman, int strength) {
         this.name = name;
         this.realName = realName;
         this.superPower = superPower;
@@ -39,7 +39,7 @@ public class Superhero {
         return isHuman;
     }
 
-    public double getStrength() {
+    public int getStrength() {
         return strength;
     }
 
