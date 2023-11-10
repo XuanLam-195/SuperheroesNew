@@ -39,6 +39,11 @@ public class Control {
         superheroes.add(hulk);
         superheroes.add(batman);
         Collections.sort(superheroes, new SuperheroesNameComparator());
+        Collections.sort(superheroes, new ComparatorIsHuman());
+        Collections.sort(superheroes, new ComparatorStrength());
+        Collections.sort(superheroes, new ComparatorRealName());
+        Collections.sort(superheroes, new ComparatorSuperpower());
+        Collections.sort(superheroes, new ComparatorYearCreated());
     }
 
     public void addSuperhero(Superhero hero) {

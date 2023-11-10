@@ -34,7 +34,7 @@ public class FileHandler {
                     String superPower = parts[2];
                     int yearCreated = Integer.parseInt(parts[3]);
                     String isHuman = parts[4];
-                    double strength = Double.parseDouble(parts[5]);
+                    int strength = Integer.parseInt(parts[5]);
                     superheroes.add(new Superhero(name, realName, superPower, yearCreated, isHuman, strength));
                 }
             }
