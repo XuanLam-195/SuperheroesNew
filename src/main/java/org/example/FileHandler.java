@@ -28,17 +28,17 @@ public class FileHandler {
         try(Scanner scanner = new Scanner(new File("Superheroes.csv"))){
             while( scanner.hasNextLine()){
                 String[] parts = scanner.nextLine().split(",");
-                if (parts.length == 6){
+                if (parts.length == 6) {
                     String name = parts[0];
                     String realName = parts[1];
                     String superPower = parts[2];
                     int yearCreated = Integer.parseInt(parts[3]);
                     String isHuman = parts[4];
                     double strength = Double.parseDouble(parts[5]);
-                    superheroes.add(new Superhero(name, realName, superPower, yearCreated, isHuman,strength));
+                    superheroes.add(new Superhero(name, realName, superPower, yearCreated, isHuman, strength));
                 }
             }
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
