@@ -1,18 +1,27 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Database {
     private FileHandler fileHandler = new FileHandler();
     private ArrayList<Superhero> superheroes;
 
 
-    public Database() {
-        superheroes = new ArrayList<>();
-        populateDatabase();
-    }
 
-    public void populateDatabase() {
+      public Database(boolean shouldLoadSuperheroes){
+        superheroes = new ArrayList<>();
+        if(shouldLoadSuperheroes){
+            fileHandler.loadSuperheroes(superheroes);
+            if(superheroes.isEmpty()){
+                populateDatabase();
+            }
+        }
+
+        }
+
+
+    private void populateDatabase() {
         Superhero superman = new Superhero("Superman", "Clark Kent",
                 "Super strength, flight, x-ray vision",
                 1938, "No", 8698);
@@ -31,6 +40,12 @@ public class Database {
         superheroes.add(iroman);
         superheroes.add(hulk);
         superheroes.add(batman);
+        Collections.sort(superheroes, new SuperheroesNameComparator());
+        Collections.sort(superheroes, new ComparatorIsHuman());
+        Collections.sort(superheroes, new ComparatorStrength());
+        Collections.sort(superheroes, new ComparatorRealName());
+        Collections.sort(superheroes, new ComparatorSuperpower());
+        Collections.sort(superheroes, new ComparatorYearCreated());
     }
 
     public ArrayList<Superhero> getSuperheroes() {
@@ -53,15 +68,10 @@ public class Database {
         return superheroList;
     }
 
-    public ArrayList<Superhero> deleteHeroName(String name) {
-        ArrayList<Superhero> superheroList = new ArrayList<>();
-        for (Superhero superhero : superheroes) {
-            if (superhero.getName().toLowerCase().contains(name.toLowerCase())) {
-                superheroList.add(superhero);
-            }
-        }
-        superheroes.removeAll(superheroList);
-        return superheroList;
+    public void removeSuperheroes(ArrayList<Superhero> removedSuperheroes){
+        superheroes.removeAll(removedSuperheroes);
+
+
     }
 
     public void saveSuperheroes() {

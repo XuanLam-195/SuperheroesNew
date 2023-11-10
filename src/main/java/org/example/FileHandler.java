@@ -12,14 +12,13 @@ import java.util.Scanner;
 public class FileHandler {
 
     public void saveSuperheroes(ArrayList<Superhero> superheroes) {
-        try (PrintStream output = new PrintStream(new File("Superheros.csv"))) {
+        try (PrintStream output = new PrintStream(new File("Superheroes.csv"))) {
             for (Superhero superhero : superheroes) {
                 output.println(superhero.getName() + "," + superhero.getRealName() +
                         "," + superhero.getSuperPower() + "," + superhero.getYearCreated() +
                         "," + superhero.getIsHuman() + "," + superhero.getStrength());
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
@@ -27,7 +26,7 @@ public class FileHandler {
     public void loadSuperheroes(ArrayList<Superhero> superheroes){
         try(Scanner scanner = new Scanner(new File("Superheroes.csv"))){
             while( scanner.hasNextLine()){
-                String[] parts = scanner.nextLine().split(",");
+                String[] parts = scanner.nextLine().split(";");
                 if (parts.length == 6) {
                     String name = parts[0];
                     String realName = parts[1];
@@ -39,7 +38,6 @@ public class FileHandler {
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 }

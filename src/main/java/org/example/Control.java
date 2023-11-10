@@ -7,60 +7,24 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Control {
-    private ArrayList<Superhero> superheroes;
-    private FileHandler fileHandler = new FileHandler();
 
-    public Control() {
-        superheroes = new ArrayList<>();
-        populateDatabase();
-    }
+    private Database database = new Database(true);
 
-    public void populateDatabase() {
-        Superhero superman = new Superhero("Superman", "Clark Kent",
-                "Super strength, flight, xray vision",
-                1938, "No", 8698);
-        System.out.println("-----------------------------");
-        Superhero spiderman = new Superhero("Spider-Man", "Peter Parker",
-                "Wall-climbing, web-shooting, danger sense",
-                1962, "Yes", 6299);
-        System.out.println("-----------------------------");
-        Superhero iroman = new Superhero("ironman", "Tony", "Flight, Strength, energy weapon, protection",
-                2015, "Yes", 9587);
-        System.out.println("______________________________");
-        Superhero hulk = new Superhero("hulk", "Robert", "Invulnerability, regeneration, extraordinary leaping ability, Adaptability",
-                2018, "no", 8928);
-        System.out.println("______________________________");
-        Superhero batman = new Superhero("Batman", "Bruce Wayne", "Exceptional Intelligence, Master Martial Artist, Physical Prowess",
-                1939, "Yes", 6475);
 
-        superheroes.add(superman);
-        superheroes.add(spiderman);
-        superheroes.add(iroman);
-        superheroes.add(hulk);
-        superheroes.add(batman);
-        Collections.sort(superheroes, new SuperheroesNameComparator());
-        Collections.sort(superheroes, new ComparatorIsHuman());
-        Collections.sort(superheroes, new ComparatorStrength());
-        Collections.sort(superheroes, new ComparatorRealName());
-        Collections.sort(superheroes, new ComparatorSuperpower());
-        Collections.sort(superheroes, new ComparatorYearCreated());
-    }
 
     public void addSuperhero(Superhero hero) {
-        superheroes.add(hero);
+       database.addSuperhero(hero);
     }
 
     public ArrayList<Superhero> getSuperheroes() {
-        return superheroes;
+        return database.getSuperheroes();
     }
 
-    public void setSuperheroes(ArrayList<Superhero> superheroes) {
-        this.superheroes = superheroes;
-    }
+
 
     public ArrayList<Superhero> searchSuperheroName(String name) {
         ArrayList<Superhero> superheroList = new ArrayList<>();
-        for (Superhero superhero : superheroes) {
+        for (Superhero superhero : database.getSuperheroes()) {
             if (superhero.getName().toLowerCase().contains(name.toLowerCase())) {
                 if (!superheroList.contains(superhero.getName())) {
                     superheroList.add(superhero);
@@ -72,28 +36,29 @@ public class Control {
 
     public ArrayList<Superhero> deleteHeroName(String name) {
         ArrayList<Superhero> superheroList = new ArrayList<>();
-        for (Superhero superhero : superheroes) {
+        for (Superhero superhero : database.getSuperheroes()) {
             if (superhero.getName().toLowerCase().contains(name.toLowerCase())) {
                 superheroList.add(superhero);
             }
         }
-        superheroes.removeAll(superheroList);
+       database.removeSuperheroes(superheroList);
+        database.saveSuperheroes();
         return superheroList;
     }
+     public void editSuperheroes(int index, Superhero newSuperhero){
+        Superhero oldSuperhero = database.getSuperheroes().get(index-1);
+         getSuperheroes().set(index -1, newSuperhero);
+         if(!oldSuperhero.equals(newSuperhero)){
+             saveListOfHeroes();
+         }
+     }
 
     public void saveListOfHeroes() {
-        fileHandler.saveSuperheroes(superheroes);
+       database.saveSuperheroes();
     }
 
 
-    public String toString () {
-        String heroes = "";
-        int counter = 0;
-        for (Superhero superhero : superheroes) {
-            heroes += (++counter) + " " + superhero + "\n";
-        }
-        return heroes;
-    }
+
 
     public void sortSuperHeroName() {
     }
